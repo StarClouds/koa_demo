@@ -1,4 +1,4 @@
-const createErrorInfo = (code, message, result) => {
+const createErrorInfo = (code, message, result = '') => {
   return {
     code,
     message,

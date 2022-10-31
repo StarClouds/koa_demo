@@ -14,12 +14,8 @@ const userValidator = async (ctx, next) => {
 const verifyUser = async (ctx, next) => {
   const { user_name } = ctx.request.body;
   if (await getUserInfo({ user_name })) {
-    ctx.status = 409;
-    ctx.body = {
-      code: '10002',
-      message: '用户已存在',
-      result: '',
-    };
+    
+    ctx.app.emit('error', userAlreadyExited, ctx)
     return;
   }  
   await next();
