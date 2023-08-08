@@ -1,16 +1,25 @@
 // const { createUser, getUserInfo } = require('../service/user.service')
+// import mockjs from 'mockjs'
+const mockjs = require('mockjs')
+const { delay } = require('../utils/index')
+const dataList = mockjs.mock({
+  'dataList|100': [
+      {
+          id: '@id',
+          name: '@cname',
+          score: '@integer(50-100)',
+          city: '@city',
+          time: '@date'
+      } 
+  ]
+})
 class UmiController {
   async getList(ctx, next) {
-    // // 1获取参数
-    // const {user_name, password} = ctx.request.body
-
-    // // 2操作数据库
-    // const res = await createUser(user_name, password)
-    // // 3返回结果
+    await delay(2000)
     ctx.body = {
       code: 0,
-      message: '注册成功',
-      result: {}
+      message: 'success',
+      ...dataList
     }
   }
 
